@@ -27,6 +27,7 @@ router.get('/selectAll', function(req, res) {
 // Front에서 input 받았을 때 넣을 구문
 router.post('/insert', function(req, res) {
     if (logincheck(req) === 402) {
+        console.log('oepwropiwepoir')
         res.status(402).send("<script>alert('사용자 세션이 만료되었습니다');location.href='/';</script>")
     }
 
@@ -70,17 +71,6 @@ router.post('/delete', (req, res) => {
         }
 
         res.sendStatus(200)
-        /*
-        db.query(`SELECT * FROM TODOLIST WHERE userId = ?`, [req.session.userId], (err, rows) => {
-            if(err) {
-                console.log(err);
-                res.status(400).send(err);
-                return
-            }
-
-            console.log('삭제되고 reset된 데이터 : ', rows);
-            res.status(200).send(rows);
-        })*/
     })
 })
 

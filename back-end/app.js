@@ -1,7 +1,10 @@
 const express = require('express');
 const dbroute = require('./routes/dbroute');
 const user = require('./routes/users');
-const path = require('path')
+const calendar = require('./routes/calendar');
+const secret = require('./secret');
+
+const path = require('path');
 
 const app = express();
 
@@ -19,13 +22,13 @@ app.use(
         httpOnly: true,
         // secure: true,
         // https 환경에서만 session 정보를 주고 받는다. Node 서버가 프록시 뒤에 있다면 app.use(session({}))을 하기 전에 app.set('trust proxy', 1)을 설정해주는 게 필요하다고 한다.
-        key: 'jabchokey',
-        secret: '@haJabcho',
+        key: secret.sessionKey,
+        secret: secret.sessionSecret,
         resave: false,
         saveUninitialized: false,
         cookie: {
             httpOnly: true,
-            maxAge: 1000 * 60 * 15
+            maxAge: 1000 * 60 * 30
             // secure: true,
             // domain, maxAge, expires, path 등의 옵션 설정 
         },
@@ -49,7 +52,7 @@ app.use('/', (req, res, next) => {
 app.get('/', function(req, res) {
     console.log(req.session);
     if (req.session.userId) {
-        res.redirect('/main')
+        res.redirect('/calendar')
     }
 
     res.sendFile(path.join(__dirname, 'public/index.out.html'));
@@ -72,8 +75,18 @@ app.get('/main', function(req, res) {
     }
 })
 
+app.get('/calendar', function(req, res) {
+    if (!req.session.userId) {
+        res.status(402).send("<script>alert('사용자 세션이 만료되었습니다');location.href='/';</script>")
+    } else {
+        res.sendFile(path.join(__dirname, 'public/calendar.out.html'))
+    }
+})
+
 // /api 요청 받으면 
 app.use('/api/db', dbroute);
 app.use('/api/user', user);
+app.use('/api/calendar', calendar);
+
 
 app.listen(3000);

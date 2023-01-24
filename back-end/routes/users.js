@@ -56,7 +56,7 @@ router.post('/login', function(req, res) {
         if (hashPw_ === hashPw2) {
             console.log("비밀번호 일치");
             req.session.userId = userId;
-            const url = '/main'
+            const url = '/calendar'
             res.status(200).send(url)
         } else {
             console.log("비밀번호 불일치");

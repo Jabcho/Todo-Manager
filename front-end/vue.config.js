@@ -9,6 +9,7 @@ const path = require('path')
 
 module.exports = {
   outputDir: path.resolve(__dirname, '../back-end/public/'),
+
   pages: {
     login: {
       entry:'src/pages/login/main.js',
@@ -24,20 +25,31 @@ module.exports = {
       entry: 'src/pages/signup/main.js',
       template: 'public/signup.html',
       filename: 'signup.out.html'
+    },
+    calendar: {
+      entry: 'src/pages/calendar/main.js',
+      template: 'public/calendar.html',
+      filename: 'calendar.out.html'
     }
-  },
-/*
-  devServer: {
-    host: '0.0.0.0',
-    port: 8080,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        pathRewrite: {
-          "^/api": "",
+  }
+  /*
+    devServer: {
+      host: '0.0.0.0',
+      port: 8080,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+          pathRewrite: {
+            "^/api": "",
+          }
         }
       }
-    }
-  },*/
+    },*/,
+
+  pluginOptions: {
+    vuetify: {
+			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
+		}
+  }
 }

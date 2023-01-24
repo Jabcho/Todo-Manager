@@ -5,9 +5,12 @@
             <i class="fas fa-solid fa-user" aria-hidden="true"></i>
             <span @click="logout">Logout</span>
         </div>
+        <a href="/calendar">Calendar</a>
     </div>
     <div>
-      <TodoHeader></TodoHeader>
+      <TodoHeader>
+        <h1>TODOLIST</h1>
+      </TodoHeader>
       <TodoInput v-on:addTodo="addTodo"></TodoInput>
       <TodoList v-on:removeTodo="removeTodo"></TodoList>
       <TodoFooter v-on:clearTodo="clearTodo"></TodoFooter>
@@ -121,6 +124,12 @@ export default {
 
 <style scoped>
   @import '/src/assets/global.css';
+
+  h1 {
+        color: #2F3B52;
+        font-weight: 500;
+        margin: 3.5rem 0 1.5rem;
+    }
   
   #user-container {
     margin-top: 1rem;

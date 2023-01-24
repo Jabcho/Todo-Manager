@@ -1,6 +1,8 @@
 <template>
     <div id="app">
-        <TodoHeader></TodoHeader>
+        <TodoHeader>
+            <h1>TODOLIST</h1>
+        </TodoHeader>
         <div class="container">
             <div class="item-container">
                 <i class="loginitem fas fa-solid fa-user" aria-hidden="true"></i>
@@ -66,6 +68,12 @@ export default {
 
 <style scoped>
     @import '/src/assets/global.css';
+
+    h1 {
+        color: #2F3B52;
+        font-weight: 500;
+        margin: 3.5rem 0 1.5rem;
+    }
     .container {
         width: 70%;
         margin: 5rem auto;
